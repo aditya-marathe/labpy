@@ -94,5 +94,5 @@ Since the output is a `Quantity` you can still use `.val` and `.err` to get the 
 
 ### Limitations and future improvements
 - The program can be slow - depends on the size of the input or number of parameters.
-- Allow the use of non-keyword arguments for functions decorated with `propagate_err`.
+- Allow the use of non-keyword arguments for functions decorated with `propagate_errors`.
 - In `Quantity` class, make `_SUPER_NUMS` a class variable instead of an instance variable.
