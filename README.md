@@ -18,7 +18,6 @@ Please note that this release is for **Python 3.10** or above - may not work as 
 After downloading the package in your working directory, you can import the module like so:
 ```
 import labpy
-
 ```
 
 Next, create a code implementation of the **mathematical function** (must have integer, float or array type inputs and outputs) as shown below - make sure to include all the variables in the function parameters. Then above your function, add the `labpy.propagate_errors` decorator.
