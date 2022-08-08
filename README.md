@@ -45,14 +45,12 @@ def kinetic_energy(m, v):
     
     """
     return 0.5 * m * v ** 2
-
 ```
 
 The great thing about this is that, you can use the function as normal otherwise. The only thing you will need to remember to do is to **use keyword arguments only**! For example:
 
 ```
 kinetic_energy(m=22.5, v=5.5)
-
 ```
 
 Output: `340.3125`
@@ -84,7 +82,6 @@ measured_mass = labpy.Quantity(np.linspace(1.5, 22.5, 100), np.ones(100) * 0.1) 
 measured_velocity = labpy.Quantity(np.linspace(1.5, 5.5, 100), np.ones(100) * 0.01)  # m/s
 
 kinetic_energy(m=measured_mass, v=measured_velocity)
-
 ```
 
 Output: `[ (17.0 ± 1.0) × 10⁻¹     (20.0 ± 1.0) × 10⁻¹      ...    (332.0 ± 2.0)   (340.0 ± 2.0)    ]`
