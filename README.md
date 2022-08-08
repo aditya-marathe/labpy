@@ -57,8 +57,8 @@ Output: `340.3125`
 Then, we can initialise two `labpy.Quantity` objects, which hold the value and uncertainty.
 
 ```
-measured_mass = labpy.Quantity(22.5, 0.1)     # kg
-measured_velocity = labpy.Quantity(5.5, 0.1)  # m/s
+measured_mass = labpy.Quantity(22.5, 0.1)      # kg
+measured_velocity = labpy.Quantity(5.5, 0.01)  # m/s
 ```
 
 You can access the value and error stored in this class by `measured_mass.val` and `measured_mass.err` respectively.
