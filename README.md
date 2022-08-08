@@ -5,7 +5,7 @@
 
 ### Introduction
 
-Hi! Let me give you a quick introduction to using this Python package. I have coded this package to be used in Physics labs, with the intention of creating tools to help Physics students during labs.
+Hi! Let me give you a quick introduction to using this Python package. I have coded this package to be used in Physics labs, with the intention of creating tools to help me and other Physics students during labs.
 
 At the moment, this package only features an error (or uncertainty) propagation system. The idea behind creating this is very simple: I have created a function that allows me to modify a **decorated** function. Then, I have created a simple class which can hold a value with its associated error.
 
@@ -93,6 +93,7 @@ Since the output is a `Quantity` you can still use `.val` and `.err` to get the 
 2. `Quantity.get_string(units='')`: Returns the string representation of the quantity. It is also possible to specify the units.
 
 ### Limitations and future improvements
+- General code code clean up and adding docstrings.
 - The program can be slow - depends on the size of the input or number of parameters.
 - Allow the use of non-keyword arguments for functions decorated with `propagate_errors`.
 - In `Quantity` class, make `_SUPER_NUMS` a class variable instead of an instance variable.
