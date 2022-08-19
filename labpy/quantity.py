@@ -1,13 +1,26 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
-__all__ = ('Quantity',)
-__version__ = '1.0'
+__all__ = ('Quantity',
+           'NUM_ARR_TYPE',
+           'DISPLAY_ITEM_LIMIT',
+           'QuantityReassignmentError')
+__version__ = '1.1'
 __author__ = 'Aditya Marathe'
+
+from typing import List
+from typing import Tuple
+from typing import Union
 
 import numpy as np
 
-NUM_ARR_TYPE = int | float | list | np.ndarray
+# 3.10 Typing
+# NUM_ARR_TYPE = int | float | list[int | float] | np.ndarray
+
+NUM_ARR_TYPE = Union[int, float, List[Union[int, float]], np.ndarray]
+DISPLAY_ITEM_LIMIT = 2
+
+_SUPER_NUMS = list('⁰¹²³⁴⁵⁶⁷⁸⁹')
 
 
 class QuantityReassignmentError(Exception):
@@ -16,14 +29,12 @@ class QuantityReassignmentError(Exception):
 
 
 class Quantity:
-    __slots__ = ('_SUPER_NUMS', '_val', '_err')
+    __slots__ = ('_val', '_err')
 
     def __init__(self,
                  val: NUM_ARR_TYPE,
                  err: NUM_ARR_TYPE
                  ):
-        self._SUPER_NUMS = list('⁰¹²³⁴⁵⁶⁷⁸⁹')
-
         self._val = self._validate_input(val)
         self._err = self._validate_input(err)
 
@@ -38,14 +49,15 @@ class Quantity:
         return float(f'%.{int(sf)}g' % number)
 
     @staticmethod
-    def _get_scientific(number: float) -> tuple[float, int]:
+    def _get_scientific(number: float) -> Tuple[float, int]:
         value, _, exp = f'{number:E}'.rpartition('E')
         return float(value), int(exp)
 
-    def _get_superscript(self, number: int) -> str:
+    @staticmethod
+    def _get_superscript(number: int) -> str:
         str_num = str(abs(number))
         for i in range(10):
-            str_num = str_num.replace(str(i), self._SUPER_NUMS[i])
+            str_num = str_num.replace(str(i), _SUPER_NUMS[i])
 
         if abs(number) == number:
             sign = '\u207a'
@@ -67,13 +79,12 @@ class Quantity:
         if isinstance(self.val, float):
             return self._get_string(self.val, self.err) + ' ' + units
 
-        limit = 2
         output = '[\t'
-        for i, val in np.ndenumerate(self.val[:limit]):
+        for i, val in np.ndenumerate(self.val[:DISPLAY_ITEM_LIMIT]):
             output += self._get_string(val, self.err[i]) + '\t'
 
         output += ' ... \t'
-        for i, val in np.ndenumerate(self.val[-limit:]):
+        for i, val in np.ndenumerate(self.val[-DISPLAY_ITEM_LIMIT:]):
             output += self._get_string(val, self.err[(-(i[0] + 1),)]) + '\t'
 
         return output + ' ]' + ' ' + units
