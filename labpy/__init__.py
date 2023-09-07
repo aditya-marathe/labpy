@@ -1,8 +1,8 @@
-#!/usr/local/bin/python
-# -*- coding: utf-8 -*-
+from labpy.version import VERSION
 
-__version__ = '1.0'
-__author__ = 'Aditya Marathe'
+from labpy.commons import NumArrType, MathFuncType
 
-from .propagate import *
-from .quantity import *
+from labpy.quantity import Quantity
+
+from labpy.qmath import differentiate
+from labpy.qmath import propagate_uncert
